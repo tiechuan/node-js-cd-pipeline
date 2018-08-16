@@ -1,0 +1,19 @@
+env:
+  global:
+    secure: RQj5OgAgFD7Woeq0/EKFHVd3HD/BlsIgtsy+8SI/UUTq7yZ2gvNC/qX83oGXCFsQ5ydh5DydbmfSUP25OPh7G75FO9RQnWaM/Xg1uh7PuJb/FJcaLtykHj8Jnu5NBP7fze2VEfqeYvS/5jtfTft7k03P5AiAkCm87hfUnrm91J4rGWrWHpbZ29232gVy3cIDt4p/W9polRJDs+5YP0Eg6FEM/uxiXILUaj0s3p1B1GRhHWUxLkxS6dBBC01wkulZA5ImgKlmdhaPl3KoFLRZnpvkgoriQSImAv2LOInXvJhdewT56NuCt+gxT9ILxs5oR+7CH1D7ny0T7ONN7b1GzjL3oW5ulk8V2Mwfmu7RemD4+qaJhe36pstPnjFlnp/BLyZi9Kf/ZvC4YU+qEKCvlNmmAXmruyDjt9T+dWk56Fe5BbCSC9s1SwEa3PGQckiZkoMr+UPQev91Df6f3cej+D+DB5dEVJltIMh8pZZXhJj1/3CX+z6A9vMLWDW3UoysAiJaILNr0wKs12Sw2CJH+xonegev7Hb6O6hndodd7S/Ou4NSuHNSabKFx6qACu07iwtx8O/DCk+MwSOuk3c2bpvgXeChQBR+ALK9DRoQpI88C6vcv8gaiiFIrOoyksGxM4+8AyxoH1Ft+qOJDlMe245aLblSi2+kUCEAOlf+p1I=
+language: node_js
+node_js:
+- node
+cache:
+  directories:
+  - node_modules
+before_deploy:
+  - npm install now --no-save
+  - now rm node-cd --token $NOW_TOKEN --yes || true
+deploy:
+- provider: script
+  # deploys the application to now.sh
+  script: now --public --token $NOW_TOKEN
+  skip_cleanup: true
+  on:
+    master: true
